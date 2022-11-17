@@ -28,7 +28,7 @@ namespace LoginRegistro.Controllers
         {
             var h_password = GetMd5(_usuario.Password);
             var data = _db.Usuario.Where(u => u.Email.Equals(_usuario.Email) && u.Password.Equals(h_password)).ToList();
-            if(data.Count() > 0)
+            if (data.Count() > 0)
             {
                 //añadir a la sesion del usuario
                 Session["NombreApellido"] = data.FirstOrDefault().Nombre + " " + data.FirstOrDefault().Apellido;
@@ -38,8 +38,8 @@ namespace LoginRegistro.Controllers
             }
             else
             {
-                ViewBag.error = "Fallo el login";
-                return RedirectToAction("index");
+                ViewBag.error = data.Count;
+                return View();
             }
         }
 
